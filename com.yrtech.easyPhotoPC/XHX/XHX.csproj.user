@@ -1,0 +1,14 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>C:\Workspace\com.yrtech.easyPhoto\发布文件\|C:\Workspace\Panku_YFND_Setting_Maxsight\发布文件\|D:\D盘\workspace\项目整理\进行中的项目\Source\PC程序\英菲尼迪\发布文件\</PublishUrlHistory>
+    <InstallUrlHistory>http://123.57.229.128/EasyPhotoClient/|http://123.57.229.128/InfinitiClient/</InstallUrlHistory>
+    <SupportUrlHistory>
+    </SupportUrlHistory>
+    <UpdateUrlHistory>
+    </UpdateUrlHistory>
+    <BootstrapperUrlHistory>
+    </BootstrapperUrlHistory>
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+</Project>

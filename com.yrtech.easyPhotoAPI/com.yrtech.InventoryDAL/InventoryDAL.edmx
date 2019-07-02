@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Inventory.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="VinCode" />
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VinCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhotoName" Type="nvarchar(max)" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddChk" Type="nvarchar" MaxLength="50" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="InDateTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.AnswerLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="AnswerLog">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="VinCode" />
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="VinCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VinCode8" Type="nvarchar" MaxLength="10" />
+          <Property Name="ModelName" Type="nvarchar" MaxLength="20" />
+          <Property Name="SubModelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StockAge" Type="nvarchar" MaxLength="10" />
+          <Property Name="SaleFlag" Type="varchar" MaxLength="50" />
+          <Property Name="GradeNameCn" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExteriorColor" Type="nvarchar" MaxLength="20" />
+          <Property Name="InteriorColor" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhotoName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddChk" Type="nvarchar" MaxLength="50" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="InDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CarType">
+          <Key>
+            <PropertyRef Name="CarTypeCode" />
+          </Key>
+          <Property Name="CarTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CarTypeName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“com.yrtech.easyPhoto.dbo.CarTypeLog”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="CarTypeLog">
+          <Property Name="CarTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarTypeName" Type="nvarchar" MaxLength="100" />
+        </EntityType>-->
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="ProjectCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="NoteID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NoteName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Type" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="InDateTime" Type="datetime" />
+          <Property Name="Year" Type="varchar" MaxLength="4" />
+          <Property Name="Quarter" Type="varchar" MaxLength="2" />
+          <Property Name="OrderNO" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.ProjectsLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ProjectsLog">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="ProjectName" />
+          </Key>
+          <Property Name="ProjectCode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="InDateTime" Type="datetime" />
+          <Property Name="Year" Type="varchar" MaxLength="4" />
+          <Property Name="Quarter" Type="varchar" MaxLength="2" />
+          <Property Name="OrderNO" Type="int" />
+          <Property Name="DeployChk" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“com.yrtech.easyPhoto.dbo.ProjectVersion”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="ProjectVersion">
+          <Property Name="CurrentVersion" Type="varchar" MaxLength="3" />
+        </EntityType>-->
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="RoleTypeID" />
+          </Key>
+          <Property Name="RoleTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleTypeCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="RoleTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleTypeProgram">
+          <Key>
+            <PropertyRef Name="RoleTypeProgramID" />
+          </Key>
+          <Property Name="RoleTypeProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleTypeCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ProgramCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InUserID" Type="varchar" MaxLength="20" />
+          <Property Name="InDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="100" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="20" />
+          <Property Name="InDateTime" Type="datetime" />
+          <Property Name="AreaCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.ShopLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ShopLog">
+          <Key>
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="100" />
+          <Property Name="InUserID" Type="nvarchar" MaxLength="20" />
+          <Property Name="InDateTime" Type="datetime" />
+          <Property Name="UseChk" Type="bit" />
+          <Property Name="AreaCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoginSuccessChk" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PSW" Type="varchar" MaxLength="20" />
+          <Property Name="RoleType" Type="char" MaxLength="1" />
+          <Property Name="InUserID" Type="varchar" MaxLength="20" />
+          <Property Name="InDateTime" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MacAddress" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="InventoryStoreContainer">
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarType" EntityType="Self.CarType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleTypeProgram" EntityType="Self.RoleTypeProgram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerLog" EntityType="Self.AnswerLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AnswerLog].[ProjectCode] AS [ProjectCode], 
+    [AnswerLog].[VinCode] AS [VinCode], 
+    [AnswerLog].[ShopCode] AS [ShopCode], 
+    [AnswerLog].[VinCode8] AS [VinCode8], 
+    [AnswerLog].[ModelName] AS [ModelName], 
+    [AnswerLog].[SubModelName] AS [SubModelName], 
+    [AnswerLog].[StockAge] AS [StockAge], 
+    [AnswerLog].[SaleFlag] AS [SaleFlag], 
+    [AnswerLog].[GradeNameCn] AS [GradeNameCn], 
+    [AnswerLog].[ExteriorColor] AS [ExteriorColor], 
+    [AnswerLog].[InteriorColor] AS [InteriorColor], 
+    [AnswerLog].[PhotoName] AS [PhotoName], 
+    [AnswerLog].[Remark] AS [Remark], 
+    [AnswerLog].[AddChk] AS [AddChk], 
+    [AnswerLog].[InUserID] AS [InUserID], 
+    [AnswerLog].[InDateTime] AS [InDateTime]
+    FROM [dbo].[AnswerLog] AS [AnswerLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProjectsLog" EntityType="Self.ProjectsLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProjectsLog].[ProjectCode] AS [ProjectCode], 
+    [ProjectsLog].[ProjectName] AS [ProjectName], 
+    [ProjectsLog].[InUserID] AS [InUserID], 
+    [ProjectsLog].[InDateTime] AS [InDateTime], 
+    [ProjectsLog].[Year] AS [Year], 
+    [ProjectsLog].[Quarter] AS [Quarter], 
+    [ProjectsLog].[OrderNO] AS [OrderNO], 
+    [ProjectsLog].[DeployChk] AS [DeployChk]
+    FROM [dbo].[ProjectsLog] AS [ProjectsLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ShopLog" EntityType="Self.ShopLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ShopLog].[ShopCode] AS [ShopCode], 
+    [ShopLog].[ShopName] AS [ShopName], 
+    [ShopLog].[InUserID] AS [InUserID], 
+    [ShopLog].[InDateTime] AS [InDateTime], 
+    [ShopLog].[UseChk] AS [UseChk], 
+    [ShopLog].[AreaCode] AS [AreaCode], 
+    [ShopLog].[Password] AS [Password], 
+    [ShopLog].[LoginSuccessChk] AS [LoginSuccessChk]
+    FROM [dbo].[ShopLog] AS [ShopLog]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Inventory" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InventoryDAL" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answer" EntityType="Inventory.Answer" />
+          <EntitySet Name="CarType" EntityType="Inventory.CarType" />
+          <EntitySet Name="Note" EntityType="Inventory.Note" />
+          <EntitySet Name="Program" EntityType="Inventory.Program" />
+          <EntitySet Name="Projects" EntityType="Inventory.Projects" />
+          <EntitySet Name="RoleType" EntityType="Inventory.RoleType" />
+          <EntitySet Name="RoleTypeProgram" EntityType="Inventory.RoleTypeProgram" />
+          <EntitySet Name="Shop" EntityType="Inventory.Shop" />
+          <EntitySet Name="UserInfo" EntityType="Inventory.UserInfo" />
+          <EntitySet Name="AnswerLog" EntityType="Inventory.AnswerLog" />
+          <EntitySet Name="ProjectsLog" EntityType="Inventory.ProjectsLog" />
+          <EntitySet Name="ShopLog" EntityType="Inventory.ShopLog" />
+        </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="VinCode" />
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VinCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddChk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CarType">
+          <Key>
+            <PropertyRef Name="CarTypeCode" />
+          </Key>
+          <Property Name="CarTypeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CarTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="ProjectCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="NoteID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NoteName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNO" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="RoleTypeID" />
+          </Key>
+          <Property Name="RoleTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleTypeCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RoleTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RoleTypeProgram">
+          <Key>
+            <PropertyRef Name="RoleTypeProgramID" />
+          </Key>
+          <Property Name="RoleTypeProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleTypeCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ProgramCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InUserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ShopCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AreaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PSW" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="InUserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MacAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AnswerLog">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="VinCode" />
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ProjectCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="VinCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShopCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VinCode8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ModelName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SubModelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StockAge" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SaleFlag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GradeNameCn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExteriorColor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InteriorColor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddChk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProjectsLog">
+          <Key>
+            <PropertyRef Name="ProjectCode" />
+            <PropertyRef Name="ProjectName" />
+          </Key>
+          <Property Name="ProjectCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNO" Type="Int32" />
+          <Property Name="DeployChk" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ShopLog">
+          <Key>
+            <PropertyRef Name="ShopCode" />
+          </Key>
+          <Property Name="ShopCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InUserID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UseChk" Type="Boolean" />
+          <Property Name="AreaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoginSuccessChk" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryStoreContainer" CdmEntityContainer="InventoryDAL">
+          <EntitySetMapping Name="Answer">
+            <EntityTypeMapping TypeName="Inventory.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="AddChk" ColumnName="AddChk" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
+                <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+                <ScalarProperty Name="VinCode" ColumnName="VinCode" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarType">
+            <EntityTypeMapping TypeName="Inventory.CarType">
+              <MappingFragment StoreEntitySet="CarType">
+                <ScalarProperty Name="CarTypeName" ColumnName="CarTypeName" />
+                <ScalarProperty Name="CarTypeCode" ColumnName="CarTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Note">
+            <EntityTypeMapping TypeName="Inventory.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="NoteName" ColumnName="NoteName" />
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Program">
+            <EntityTypeMapping TypeName="Inventory.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="Inventory.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="OrderNO" ColumnName="OrderNO" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleType">
+            <EntityTypeMapping TypeName="Inventory.RoleType">
+              <MappingFragment StoreEntitySet="RoleType">
+                <ScalarProperty Name="RoleTypeName" ColumnName="RoleTypeName" />
+                <ScalarProperty Name="RoleTypeCode" ColumnName="RoleTypeCode" />
+                <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTypeProgram">
+            <EntityTypeMapping TypeName="Inventory.RoleTypeProgram">
+              <MappingFragment StoreEntitySet="RoleTypeProgram">
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="RoleTypeCode" ColumnName="RoleTypeCode" />
+                <ScalarProperty Name="RoleTypeProgramID" ColumnName="RoleTypeProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop">
+            <EntityTypeMapping TypeName="Inventory.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+                <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="Inventory.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="PSW" ColumnName="PSW" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerLog">
+            <EntityTypeMapping TypeName="Inventory.AnswerLog">
+              <MappingFragment StoreEntitySet="AnswerLog">
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="AddChk" ColumnName="AddChk" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
+                <ScalarProperty Name="InteriorColor" ColumnName="InteriorColor" />
+                <ScalarProperty Name="ExteriorColor" ColumnName="ExteriorColor" />
+                <ScalarProperty Name="GradeNameCn" ColumnName="GradeNameCn" />
+                <ScalarProperty Name="SaleFlag" ColumnName="SaleFlag" />
+                <ScalarProperty Name="StockAge" ColumnName="StockAge" />
+                <ScalarProperty Name="SubModelName" ColumnName="SubModelName" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="VinCode8" ColumnName="VinCode8" />
+                <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+                <ScalarProperty Name="VinCode" ColumnName="VinCode" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsLog">
+            <EntityTypeMapping TypeName="Inventory.ProjectsLog">
+              <MappingFragment StoreEntitySet="ProjectsLog">
+                <ScalarProperty Name="DeployChk" ColumnName="DeployChk" />
+                <ScalarProperty Name="OrderNO" ColumnName="OrderNO" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopLog">
+            <EntityTypeMapping TypeName="Inventory.ShopLog">
+              <MappingFragment StoreEntitySet="ShopLog">
+                <ScalarProperty Name="LoginSuccessChk" ColumnName="LoginSuccessChk" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AreaCode" ColumnName="AreaCode" />
+                <ScalarProperty Name="UseChk" ColumnName="UseChk" />
+                <ScalarProperty Name="InDateTime" ColumnName="InDateTime" />
+                <ScalarProperty Name="InUserID" ColumnName="InUserID" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+                <ScalarProperty Name="ShopCode" ColumnName="ShopCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

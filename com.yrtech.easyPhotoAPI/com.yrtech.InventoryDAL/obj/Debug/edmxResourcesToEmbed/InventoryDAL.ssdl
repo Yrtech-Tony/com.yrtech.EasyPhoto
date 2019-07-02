@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="ProjectCode" />
+      <PropertyRef Name="VinCode" />
+      <PropertyRef Name="ShopCode" />
+    </Key>
+    <Property Name="ProjectCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VinCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhotoName" Type="nvarchar(max)" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddChk" Type="nvarchar" MaxLength="50" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="InDateTime" Type="datetime" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.AnswerLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="AnswerLog">
+    <Key>
+      <PropertyRef Name="ProjectCode" />
+      <PropertyRef Name="VinCode" />
+      <PropertyRef Name="ShopCode" />
+    </Key>
+    <Property Name="ProjectCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="VinCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VinCode8" Type="nvarchar" MaxLength="10" />
+    <Property Name="ModelName" Type="nvarchar" MaxLength="20" />
+    <Property Name="SubModelName" Type="nvarchar" MaxLength="50" />
+    <Property Name="StockAge" Type="nvarchar" MaxLength="10" />
+    <Property Name="SaleFlag" Type="varchar" MaxLength="50" />
+    <Property Name="GradeNameCn" Type="nvarchar" MaxLength="50" />
+    <Property Name="ExteriorColor" Type="nvarchar" MaxLength="20" />
+    <Property Name="InteriorColor" Type="nvarchar" MaxLength="20" />
+    <Property Name="PhotoName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddChk" Type="nvarchar" MaxLength="50" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="InDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="CarTypeCode" />
+    </Key>
+    <Property Name="CarTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CarTypeName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6013: 表/视图“com.yrtech.easyPhoto.dbo.CarTypeLog”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="CarTypeLog">
+          <Property Name="CarTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarTypeName" Type="nvarchar" MaxLength="100" />
+        </EntityType>-->
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="ProjectCode" />
+      <PropertyRef Name="NoteID" />
+    </Key>
+    <Property Name="ProjectCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="NoteID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NoteName" Type="nvarchar" MaxLength="150" />
+    <Property Name="Type" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="ProgramID" />
+    </Key>
+    <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProgramCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProgramName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ProjectCode" />
+    </Key>
+    <Property Name="ProjectCode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="InDateTime" Type="datetime" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Quarter" Type="varchar" MaxLength="2" />
+    <Property Name="OrderNO" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.ProjectsLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="ProjectsLog">
+    <Key>
+      <PropertyRef Name="ProjectCode" />
+      <PropertyRef Name="ProjectName" />
+    </Key>
+    <Property Name="ProjectCode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="InDateTime" Type="datetime" />
+    <Property Name="Year" Type="varchar" MaxLength="4" />
+    <Property Name="Quarter" Type="varchar" MaxLength="2" />
+    <Property Name="OrderNO" Type="int" />
+    <Property Name="DeployChk" Type="bit" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6013: 表/视图“com.yrtech.easyPhoto.dbo.ProjectVersion”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="ProjectVersion">
+          <Property Name="CurrentVersion" Type="varchar" MaxLength="3" />
+        </EntityType>-->
+  <EntityType Name="RoleType">
+    <Key>
+      <PropertyRef Name="RoleTypeID" />
+    </Key>
+    <Property Name="RoleTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleTypeCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="RoleTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleTypeProgram">
+    <Key>
+      <PropertyRef Name="RoleTypeProgramID" />
+    </Key>
+    <Property Name="RoleTypeProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleTypeCode" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="ProgramCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InUserID" Type="varchar" MaxLength="20" />
+    <Property Name="InDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Shop">
+    <Key>
+      <PropertyRef Name="ShopCode" />
+    </Key>
+    <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="100" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="20" />
+    <Property Name="InDateTime" Type="datetime" />
+    <Property Name="AreaCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“com.yrtech.easyPhoto.dbo.ShopLog”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="ShopLog">
+    <Key>
+      <PropertyRef Name="ShopCode" />
+    </Key>
+    <Property Name="ShopCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="100" />
+    <Property Name="InUserID" Type="nvarchar" MaxLength="20" />
+    <Property Name="InDateTime" Type="datetime" />
+    <Property Name="UseChk" Type="bit" />
+    <Property Name="AreaCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="LoginSuccessChk" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PSW" Type="varchar" MaxLength="20" />
+    <Property Name="RoleType" Type="char" MaxLength="1" />
+    <Property Name="InUserID" Type="varchar" MaxLength="20" />
+    <Property Name="InDateTime" Type="datetime" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MacAddress" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityContainer Name="InventoryStoreContainer">
+    <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarType" EntityType="Self.CarType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleTypeProgram" EntityType="Self.RoleTypeProgram" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AnswerLog" EntityType="Self.AnswerLog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AnswerLog].[ProjectCode] AS [ProjectCode], 
+    [AnswerLog].[VinCode] AS [VinCode], 
+    [AnswerLog].[ShopCode] AS [ShopCode], 
+    [AnswerLog].[VinCode8] AS [VinCode8], 
+    [AnswerLog].[ModelName] AS [ModelName], 
+    [AnswerLog].[SubModelName] AS [SubModelName], 
+    [AnswerLog].[StockAge] AS [StockAge], 
+    [AnswerLog].[SaleFlag] AS [SaleFlag], 
+    [AnswerLog].[GradeNameCn] AS [GradeNameCn], 
+    [AnswerLog].[ExteriorColor] AS [ExteriorColor], 
+    [AnswerLog].[InteriorColor] AS [InteriorColor], 
+    [AnswerLog].[PhotoName] AS [PhotoName], 
+    [AnswerLog].[Remark] AS [Remark], 
+    [AnswerLog].[AddChk] AS [AddChk], 
+    [AnswerLog].[InUserID] AS [InUserID], 
+    [AnswerLog].[InDateTime] AS [InDateTime]
+    FROM [dbo].[AnswerLog] AS [AnswerLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProjectsLog" EntityType="Self.ProjectsLog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProjectsLog].[ProjectCode] AS [ProjectCode], 
+    [ProjectsLog].[ProjectName] AS [ProjectName], 
+    [ProjectsLog].[InUserID] AS [InUserID], 
+    [ProjectsLog].[InDateTime] AS [InDateTime], 
+    [ProjectsLog].[Year] AS [Year], 
+    [ProjectsLog].[Quarter] AS [Quarter], 
+    [ProjectsLog].[OrderNO] AS [OrderNO], 
+    [ProjectsLog].[DeployChk] AS [DeployChk]
+    FROM [dbo].[ProjectsLog] AS [ProjectsLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ShopLog" EntityType="Self.ShopLog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ShopLog].[ShopCode] AS [ShopCode], 
+    [ShopLog].[ShopName] AS [ShopName], 
+    [ShopLog].[InUserID] AS [InUserID], 
+    [ShopLog].[InDateTime] AS [InDateTime], 
+    [ShopLog].[UseChk] AS [UseChk], 
+    [ShopLog].[AreaCode] AS [AreaCode], 
+    [ShopLog].[Password] AS [Password], 
+    [ShopLog].[LoginSuccessChk] AS [LoginSuccessChk]
+    FROM [dbo].[ShopLog] AS [ShopLog]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
