@@ -194,9 +194,9 @@ namespace XHX.View
                     if (string.IsNullOrEmpty(shopCode)) break; ;
                     if (!string.IsNullOrEmpty(shopCode))
                     {
-                        string projectCode = CommonHandler.GetComboBoxSelectedValue(cboProjects).ToString();
-                        string vinCode = msExcelUtil.GetCellValue(worksheet_FengMian, "B", i);
-                        string type = msExcelUtil.GetCellValue(worksheet_FengMian, "C", i);
+                        string projectCode = CommonHandler.GetComboBoxSelectedValue(cboProjects).ToString().Trim();
+                        string vinCode = msExcelUtil.GetCellValue(worksheet_FengMian, "B", i).Trim();
+                        string type = msExcelUtil.GetCellValue(worksheet_FengMian, "C", i).Trim();
                         webService.ShopVinListSave(projectCode, vinCode, shopCode, type);
                     }
                 }

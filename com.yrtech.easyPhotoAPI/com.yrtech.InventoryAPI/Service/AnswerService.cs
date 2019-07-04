@@ -1,4 +1,5 @@
-﻿using com.yrtech.InventoryDAL;
+﻿using com.yrtech.InventoryAPI.Common;
+using com.yrtech.InventoryDAL;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -50,6 +51,7 @@ namespace com.yrtech.InventoryAPI.Service
         }
         public void SaveShopAnswer(Answer answer)
         {
+           // CommonHelper.log("ProjectCode:" + answer.ProjectCode + "ShopCode" + answer.ShopCode + "VinCode" + answer.VinCode + "Remark" + answer.Remark + "PhotoName" + answer.PhotoName );
             Answer findOne = db.Answer.Where(x => (x.ProjectCode == answer.ProjectCode && x.ShopCode == answer.ShopCode && x.VinCode==answer.VinCode)).FirstOrDefault();
             if (findOne == null)
             {
