@@ -51,6 +51,7 @@ namespace com.yrtech.InventoryAPI.Service
         }
         public void SaveShopAnswer(Answer answer)
         {
+            if (answer.Remark == "请选择") answer.Remark = "";
            // CommonHelper.log("ProjectCode:" + answer.ProjectCode + "ShopCode" + answer.ShopCode + "VinCode" + answer.VinCode + "Remark" + answer.Remark + "PhotoName" + answer.PhotoName );
             Answer findOne = db.Answer.Where(x => (x.ProjectCode == answer.ProjectCode && x.ShopCode == answer.ShopCode && x.VinCode==answer.VinCode)).FirstOrDefault();
             if (findOne == null)
